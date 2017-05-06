@@ -1,7 +1,5 @@
 package com.lejoow.votebot.collection.api
 
-import java.util.UUID
-
 import akka.NotUsed
 import com.lightbend.lagom.scaladsl.api.transport.Method
 import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
@@ -11,7 +9,7 @@ import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
   */
 trait CollectionService extends Service {
 
-  def getVoterCounts(): ServiceCall[NotUsed, Long]
+  def getRegisteredCandidates(): ServiceCall[NotUsed, Seq[Int]]
 
   //def vote(voterCode: UUID, candidateName: String): ServiceCall[NotUsed, Done]
 
@@ -19,7 +17,7 @@ trait CollectionService extends Service {
     import Service._
 
     named("collection").withCalls(
-      restCall(Method.GET, "/api/collection/count", getVoterCounts)
+      restCall(Method.GET, "/api/collection/candidates", getRegisteredCandidates)
     ).withAutoAcl(true)
   }
 }

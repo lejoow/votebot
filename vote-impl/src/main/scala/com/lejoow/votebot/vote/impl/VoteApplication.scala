@@ -30,8 +30,8 @@ trait VoteComponents extends LagomServerComponents
   lazy val jsonSerializerRegistry = VoteSerializerRegistry
   persistentEntityRegistry.register(wire[VoterEntity])
   /*  lazy val itemRepository = wire[ItemRepository]
-    persistentEntityRegistry.register(wire[ItemEntity])
-    readSide.register(wire[ItemEventProcessor])*/
+    persistentEntityRegistry.register(wire[ItemEntity])*/
+  //readSide.register(wire[ItemEventProcessor])
 }
 
 abstract class VoteApplication(context: LagomApplicationContext) extends LagomApplication(context)
@@ -46,7 +46,7 @@ abstract class VoteApplication(context: LagomApplicationContext) extends LagomAp
 class VoteApplicationLoader extends LagomApplicationLoader {
 
   override def load(context: LagomApplicationContext): LagomApplication =
-    new VoteApplication(context)  {
+    new VoteApplication(context) {
       override def serviceLocator: ServiceLocator = NoServiceLocator
     }
 

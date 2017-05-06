@@ -1,7 +1,9 @@
 package com.lejoow.votebot.collection.impl
 
+import com.lejoow.votebot.candidate.api.CandidateService
 import com.lejoow.votebot.collection.api.CollectionService
-import com.lejoow.votebot.collection.impl.entity.VoterCounterEntity
+import com.lejoow.votebot.collection.impl.entity.VoteCollectorEntity
+import com.lejoow.votebot.vote.api.VoteService
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
@@ -30,7 +32,7 @@ trait CollectionComponents extends LagomServerComponents
 
   override lazy val lagomServer = serverFor[CollectionService](wire[CollectionServiceImpl])
   lazy val jsonSerializerRegistry = CollectionSerializerRegistry
-  persistentEntityRegistry.register(wire[VoterCounterEntity])
+  persistentEntityRegistry.register(wire[VoteCollectorEntity])
 
 }
 
@@ -40,8 +42,13 @@ abstract class CollectionApplication(context: LagomApplicationContext)
     with CollectionComponents
     with LagomKafkaComponents {
 
-  //lazy val biddingService = serviceClient.implement[BiddingService]
+  lazy val voteService = serviceClient.implement[VoteService]
+  lazy val candidateService = serviceClient.implement[CandidateService]
 
+  //lazy val voteService = serviceClient.implement[VoteService]
+  //lazy val voteService = serviceClient.implement[]
+  //lazy val biddingService = serviceClient.implement[BiddingService]
+  wire[CandidateEventSubscriber]
   //wire[BiddingServiceSubscriber]
 }
 

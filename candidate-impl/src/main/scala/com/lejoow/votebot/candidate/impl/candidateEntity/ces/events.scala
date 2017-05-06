@@ -12,9 +12,9 @@ sealed trait CandidateEvt extends AggregateEvent[CandidateEvt] {
 }
 
 object CandidateEvt {
-  //val NumShards = 4
-  //val Tag = AggregateEventTag.sharded[VoteEvt](NumShards)
-  val Tag = AggregateEventTag[CandidateEvt]
+  val NumShards = 4
+  val Tag = AggregateEventTag.sharded[CandidateEvt](NumShards)
+  //val Tag = AggregateEventTag[CandidateEvt]
 }
 
 case class CandidateCreatedEvt(candidate:Candidate) extends CandidateEvt

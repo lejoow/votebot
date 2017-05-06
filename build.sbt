@@ -79,7 +79,13 @@ lazy val collectionImpl = (project in file("collection-impl"))
     )
   )
   .settings(lagomForkedTestSettings: _*)
-  .dependsOn(collectionApi, votebotCommons, votebotTestKit % Test)
+  .dependsOn(
+    collectionApi,
+    candidateApi,
+    voteApi,
+    votebotCommons,
+    votebotTestKit % Test
+  )
 
 
 
@@ -144,5 +150,5 @@ lazy val votebotTestKit = (project in file("votebot-testkit"))
 def commonSettings: Seq[Setting[_]] = Seq(
 )
 
-lagomCassandraCleanOnStart in ThisBuild := true
+lagomCassandraCleanOnStart in ThisBuild := false
 

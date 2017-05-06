@@ -19,7 +19,7 @@ sealed trait VoterEvt extends AggregateEvent[VoterEvt] {
 
 object VoterEvt {
   //val NumShards = 4
-  //val Tag = AggregateEventTag.sharded[VoteEvt](NumShards)
+  //val Tag = AggregateEventTag.sharded[VoterEvt](NumShards)
   val Tag = AggregateEventTag[VoterEvt]
 }
 

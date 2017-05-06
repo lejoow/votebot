@@ -39,6 +39,7 @@ class VoterEntityTest extends EntitySpec[VoterCmd, VoterEvt, VoterState] {
 
   "The VoterEntity" should {
     "register a new voter and return voterCode" in withNoEntitySetup { driver =>
+
       val outcome = driver.run(registerCmd)
       outcome.replies should have size 1
       outcome.replies.head shouldBe an[Option[UUID]]
