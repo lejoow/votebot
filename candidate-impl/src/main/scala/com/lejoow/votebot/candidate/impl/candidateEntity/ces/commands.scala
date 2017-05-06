@@ -1,9 +1,7 @@
 package com.lejoow.votebot.candidate.impl.candidateEntity.ces
 
-import java.util.UUID
-
+import akka.Done
 import com.lejoow.votebot.commons.JsonUtils.singletonFormat
-import com.lejoow.votebot.vote.impl.entity.ces.VoterCmd
 import com.lightbend.lagom.scaladsl.persistence.PersistentEntity.ReplyType
 import play.api.libs.json.{Format, Json}
 
@@ -16,12 +14,8 @@ case object GetCandidateCmd extends CandidateCmd with ReplyType[CandidateState] 
   implicit val format: Format[GetCandidateCmd.type] = singletonFormat(GetCandidateCmd)
 }
 
+case class CreateCandidateCmd(candidate: Candidate, candidateNumber: Int) extends CandidateCmd with ReplyType[Done]
 
-case class RegisterVoterCmd(residentId: String,
-                            city: String,
-                            gender: Gender,
-                            age: Int) extends VoterCmd with ReplyType[Option[UUID]]
-
-object RegisterVoterCmd {
-  implicit val format: Format[RegisterVoterCmd] = Json.format
+object CreateCandidateCmd {
+  implicit val format: Format[CreateCandidateCmd] = Json.format
 }

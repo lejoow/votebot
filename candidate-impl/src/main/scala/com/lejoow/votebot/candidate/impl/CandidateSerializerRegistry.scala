@@ -1,6 +1,7 @@
 package com.lejoow.votebot.candidate.impl
 
-import com.lejoow.votebot.candidate.impl.candidateEntity.ces.{Candidate, CandidateRegisteredEvt, CandidateState}
+import com.lejoow.votebot.candidate.impl.candidateEntity.ces.{Candidate, CandidateState}
+import com.lejoow.votebot.candidate.impl.candidateRegistryEntity.ces.{CandidateRegisteredEvt, CandidateRegistryState, RegisterCandidateCmd}
 import com.lightbend.lagom.scaladsl.playjson.{JsonSerializer, JsonSerializerRegistry}
 
 /**
@@ -27,6 +28,7 @@ object CandidateSerializerRegistry extends JsonSerializerRegistry {
     /**
       * States
       */
-    JsonSerializer[CandidateState]
+    JsonSerializer[CandidateState],
+    JsonSerializer[CandidateRegistryState]
   )
 }

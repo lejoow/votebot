@@ -2,6 +2,7 @@ package com.lejoow.votebot.candidate.impl
 
 import com.lejoow.votebot.candidate.api.CandidateService
 import com.lejoow.votebot.candidate.impl.candidateEntity.CandidateEntity
+import com.lejoow.votebot.candidate.impl.candidateRegistryEntity.CandidateRegistryEntity
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
@@ -27,6 +28,8 @@ trait CandidateComponents extends LagomServerComponents
   override lazy val lagomServer = serverFor[CandidateService](wire[CandidateServiceImpl])
   lazy val jsonSerializerRegistry = CandidateSerializerRegistry
   persistentEntityRegistry.register(wire[CandidateEntity])
+  persistentEntityRegistry.register(wire[CandidateRegistryEntity])
+
   /*  lazy val itemRepository = wire[ItemRepository]
     persistentEntityRegistry.register(wire[ItemEntity])
     readSide.register(wire[ItemEventProcessor])*/

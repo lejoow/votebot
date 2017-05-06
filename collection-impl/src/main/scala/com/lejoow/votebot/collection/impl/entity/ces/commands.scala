@@ -9,7 +9,6 @@ import play.api.libs.json.Format
   */
 sealed trait VoterCounterCmd
 
-
 case object GetVoterCountCmd extends VoterCounterCmd with ReplyType[Long]{
   implicit val format: Format[GetVoterCountCmd.type] = singletonFormat(GetVoterCountCmd)
 }

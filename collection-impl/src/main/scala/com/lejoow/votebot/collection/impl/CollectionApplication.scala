@@ -2,10 +2,6 @@ package com.lejoow.votebot.collection.impl
 
 import com.lejoow.votebot.collection.api.CollectionService
 import com.lejoow.votebot.collection.impl.entity.VoterCounterEntity
-import com.lejoow.votebot.collection.impl.entity.ces.VoterCounter
-import com.lejoow.votebot.vote.api.VoteService
-import com.lejoow.votebot.vote.impl.entity.VoterEntity
-import com.lejoow.votebot.vote.impl.{VoteApplication, VoteComponents, VoteSerializerRegistry, VoteServiceImpl}
 import com.lightbend.lagom.scaladsl.api.ServiceLocator
 import com.lightbend.lagom.scaladsl.api.ServiceLocator.NoServiceLocator
 import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
@@ -41,8 +37,8 @@ trait CollectionComponents extends LagomServerComponents
 
 abstract class CollectionApplication(context: LagomApplicationContext)
   extends LagomApplication(context)
-  with CollectionComponents
-  with LagomKafkaComponents {
+    with CollectionComponents
+    with LagomKafkaComponents {
 
   //lazy val biddingService = serviceClient.implement[BiddingService]
 
@@ -52,7 +48,7 @@ abstract class CollectionApplication(context: LagomApplicationContext)
 class CollectionApplicationLoader extends LagomApplicationLoader {
 
   override def load(context: LagomApplicationContext): LagomApplication =
-    new CollectionApplication(context)  {
+    new CollectionApplication(context) {
       override def serviceLocator: ServiceLocator = NoServiceLocator
     }
 

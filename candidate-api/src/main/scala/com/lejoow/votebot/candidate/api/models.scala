@@ -7,7 +7,7 @@ import play.api.libs.json.{Format, Json}
 /**
   * Created by Joo on 6/5/2017.
   */
-case class CandidateDto(name:String, party:String)
+case class CandidateDto(candidateNumber:Int, residentId: String, name: String, party: String)
 
 object CandidateDto {
   implicit val format: Format[CandidateDto] = Json.format

@@ -1,8 +1,6 @@
 package com.lejoow.votebot.collection.impl
 
-import com.lejoow.votebot.collection.impl.entity.ces.{VoterCounter, VoterCounterCmd, VoterCounterEvt}
-import com.lejoow.votebot.vote.impl.commons.Voter
-import com.lejoow.votebot.vote.impl.entity.ces.{RegisterVoterCmd, VoterRegisteredEvt, VoterState}
+import com.lejoow.votebot.collection.impl.entity.ces.{GetVoterCountCmd, VoterCounter, VoterCounterCmd, VoterCounterEvt}
 import com.lightbend.lagom.scaladsl.playjson.{JsonSerializer, JsonSerializerRegistry}
 
 /**
@@ -19,13 +17,13 @@ object CollectionSerializerRegistry extends JsonSerializerRegistry {
     /**
       * Commands
       */
-    JsonSerializer[VoterCounterCmd],
+    JsonSerializer[GetVoterCountCmd.type ],
 
 
     /**
       * Events
       */
-    JsonSerializer[VoterCounterEvt],
+    //JsonSerializer[VoterCounterEvt],
 
     /**
       * States

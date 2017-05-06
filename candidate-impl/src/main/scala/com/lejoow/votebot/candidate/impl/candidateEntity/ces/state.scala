@@ -7,17 +7,17 @@ import play.api.libs.json.{Format, Json}
 /**
   * Created by Joo on 6/5/2017.
   */
-case class Candidate(name: String, party: String)
+case class Candidate(candidateNumber:Int, residentId:String, name: String, party: String)
 
 object Candidate {
   implicit val format: Format[Candidate] = Json.format
 }
 
-case class CandidateState(candidate: Option[Candidate], candidateNumber: Option[Int], isActive: Boolean)
+case class CandidateState(candidate: Option[Candidate], isActive: Boolean)
 
 object CandidateState {
 
-  val emptyState = CandidateState(candidate = None, candidateNumber = None, isActive = false)
+  val emptyState = CandidateState(candidate = None, isActive = false)
 
   implicit val format: Format[CandidateState] = Json.format
 }

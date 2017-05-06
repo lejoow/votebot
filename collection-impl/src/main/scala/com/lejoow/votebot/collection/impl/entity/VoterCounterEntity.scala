@@ -14,7 +14,7 @@ class VoterCounterEntity extends PersistentEntity {
   override def initialState = VoterCounter.emptyState
 
   override def behavior: Behavior = {
-    case counter =>
+    case counter => ???
   }
 
   private val getCounterCommand = Actions().onReadOnlyCommand[GetVoterCountCmd.type, Long] {
