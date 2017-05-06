@@ -32,12 +32,13 @@ class VoterEntity extends PersistentEntity {
         val evt = VoterRegisteredEvt(
           voterCode = voterCode,
           residentId = cmd.residentId,
-          age = cmd.age,
-          postCode = cmd.postCode)
+          city = cmd.city,
+          gender = cmd.gender,
+          age = cmd.age)
         ctx.thenPersist(evt)(_ => ctx.reply(Some(voterCode)))
     }.onEvent {
       case (evt: VoterRegisteredEvt, state) =>
-        val voter = Voter(evt.residentId, evt.age, evt.postCode)
+        val voter = Voter(evt.residentId, city = evt.city, gender = evt.gender, age = evt.age)
         state.copy(voterCode = Some(evt.voterCode), voter = Some(voter))
     }
   }

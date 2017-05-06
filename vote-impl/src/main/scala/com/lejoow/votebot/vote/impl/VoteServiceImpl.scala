@@ -23,10 +23,16 @@ class VoteServiceImpl(registry: PersistentEntityRegistry)
   override def registerVoter(): ServiceCall[VoterDto, UUID] = ServerServiceCall { dto =>
 
     val residentId = dto.residentId
-    val age =dto.age
-    val postCode = dto.postCode
+    val age = dto.age
+    val city = dto.city
+    val gender = dto.gender
 
-    val cmd = RegisterVoterCmd(residentId, age, postCode)
+    val cmd = RegisterVoterCmd(
+      residentId = residentId,
+      city = city,
+      gender = gender,
+      age = age
+    )
     voterEntityRef(residentId).ask(cmd).map {
       case Some(voterCode) => voterCode
       case None => throw VoterRegistrationException("Voter already registered")

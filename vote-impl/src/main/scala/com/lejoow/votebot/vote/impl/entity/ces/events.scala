@@ -2,6 +2,7 @@ package com.lejoow.votebot.vote.impl.entity.ces
 
 import java.util.UUID
 
+import com.lejoow.votebot.vote.api.GenderEnum.Gender
 import com.lightbend.lagom.scaladsl.persistence.{AggregateEvent, AggregateEventTag, AggregateEventTagger}
 import play.api.libs.json.{Format, Json}
 
@@ -22,8 +23,8 @@ object VoterEvt {
   val Tag = AggregateEventTag[VoterEvt]
 }
 
-case class VoterRegisteredEvt(voterCode:UUID, residentId:String, age:Int, postCode:String) extends VoterEvt
+case class VoterRegisteredEvt(voterCode: UUID, residentId: String, city: String, gender: Gender, age: Int) extends VoterEvt
 
-object VoterRegisteredEvt{
+object VoterRegisteredEvt {
   implicit val format: Format[VoterRegisteredEvt] = Json.format
 }

@@ -1,20 +1,21 @@
-package com.lejoow.votebot.vote.impl.entity.ces
+package com.lejoow.votebot.candidate.impl.candidateEntity.ces
 
 import java.util.UUID
 
+import com.lejoow.votebot.commons.JsonUtils.singletonFormat
+import com.lejoow.votebot.vote.impl.entity.ces.VoterCmd
 import com.lightbend.lagom.scaladsl.persistence.PersistentEntity.ReplyType
 import play.api.libs.json.{Format, Json}
-import com.lejoow.votebot.commons.JsonUtils._
-import com.lejoow.votebot.vote.api.GenderEnum.Gender
 
 /**
-  * Created by Joo on 5/5/2017.
+  * Created by Joo on 6/5/2017.
   */
-sealed trait VoterCmd
+sealed trait CandidateCmd
 
-case object GetVoterCmd extends VoterCmd with ReplyType[VoterState] {
-  implicit val format: Format[GetVoterCmd.type] = singletonFormat(GetVoterCmd)
+case object GetCandidateCmd extends CandidateCmd with ReplyType[CandidateState] {
+  implicit val format: Format[GetCandidateCmd.type] = singletonFormat(GetCandidateCmd)
 }
+
 
 case class RegisterVoterCmd(residentId: String,
                             city: String,

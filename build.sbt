@@ -4,7 +4,11 @@ lazy val root = (project in file("."))
     votebotCommons,
     votebotTestKit,
     voteApi,
-    voteImpl
+    voteImpl,
+    collectionApi,
+    collectionImpl,
+    candidateApi,
+    candidateImpl
   )
   .settings(commonSettings: _*)
 
@@ -30,7 +34,7 @@ lazy val voteApi = (project in file("vote-api"))
       lagomScaladslApi,
       playJsonDerivedCodecs
     )
-  )
+  ).dependsOn(votebotCommons)
 
 lazy val voteImpl = (project in file("vote-impl"))
   .settings(commonSettings: _*)
@@ -48,6 +52,64 @@ lazy val voteImpl = (project in file("vote-impl"))
   )
   .settings(lagomForkedTestSettings: _*)
   .dependsOn(voteApi, votebotCommons, votebotTestKit % Test)
+
+
+lazy val collectionApi = (project in file("collection-api"))
+  .settings(commonSettings: _*)
+  .settings(
+    version := "1.0-SNAPSHOT",
+    libraryDependencies ++= Seq(
+      lagomScaladslApi,
+      playJsonDerivedCodecs
+    )
+  )
+
+lazy val collectionImpl = (project in file("collection-impl"))
+  .settings(commonSettings: _*)
+  .enablePlugins(LagomScala)
+  .settings(
+    version := "1.0-SNAPSHOT",
+    libraryDependencies ++= Seq(
+      lagomScaladslPersistenceCassandra,
+      lagomScaladslTestKit,
+      lagomScaladslKafkaBroker,
+      "com.datastax.cassandra" % "cassandra-driver-extras" % "3.0.0",
+      macwire,
+      scalaTest
+    )
+  )
+  .settings(lagomForkedTestSettings: _*)
+  .dependsOn(collectionApi, votebotCommons, votebotTestKit % Test)
+
+
+
+lazy val candidateApi = (project in file("candidate-api"))
+  .settings(commonSettings: _*)
+  .settings(
+    version := "1.0-SNAPSHOT",
+    libraryDependencies ++= Seq(
+      lagomScaladslApi,
+      playJsonDerivedCodecs
+    )
+  ).dependsOn(votebotCommons)
+
+lazy val candidateImpl = (project in file("candidate-impl"))
+  .settings(commonSettings: _*)
+  .enablePlugins(LagomScala)
+  .settings(
+    version := "1.0-SNAPSHOT",
+    libraryDependencies ++= Seq(
+      lagomScaladslPersistenceCassandra,
+      lagomScaladslTestKit,
+      lagomScaladslKafkaBroker,
+      "com.datastax.cassandra" % "cassandra-driver-extras" % "3.0.0",
+      macwire,
+      scalaTest
+    )
+  )
+  .settings(lagomForkedTestSettings: _*)
+  .dependsOn(candidateApi, votebotCommons, votebotTestKit % Test)
+
 
 lazy val votebotCommons = (project in file("votebot-commons"))
   .settings(commonSettings: _*)
