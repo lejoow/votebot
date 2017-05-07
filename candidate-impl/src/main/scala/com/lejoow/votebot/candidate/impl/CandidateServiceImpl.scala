@@ -28,13 +28,11 @@ class CandidateServiceImpl(registry: PersistentEntityRegistry)
     } yield CandidateDto(candidate.candidateNumber, candidate.residentId, candidate.name, candidate.party)
   }
 
-  private def candidateEntityRef(candidateName: String) = registry.refFor[CandidateEntity](candidateName)
-
   private def candidateRegistryEntityRef = registry.refFor[CandidateRegistryEntity](CANDIDATE_REGISTRY_ID)
 
   override def candidateTopic: Topic[CandidateMsg] =
-    TopicProducer.taggedStreamWithOffset(CandidateRegistryEvt.Tag.allTags.toList) { (tag, offset) =>
-      registry.eventStream(tag, offset)
+    TopicProducer.singleStreamWithOffset { offset =>
+      registry.eventStream(CandidateRegistryEvt.Tag, offset)
         .filter {
           _.event match {
             case x@(_: CandidateRegisteredEvt) => true

@@ -14,7 +14,7 @@ case object GetCandidateCmd extends CandidateCmd with ReplyType[CandidateState] 
   implicit val format: Format[GetCandidateCmd.type] = singletonFormat(GetCandidateCmd)
 }
 
-case class CreateCandidateCmd(candidate: Candidate, candidateNumber: Int) extends CandidateCmd with ReplyType[Done]
+case class CreateCandidateCmd(candidate: Candidate) extends CandidateCmd with ReplyType[Done]
 
 object CreateCandidateCmd {
   implicit val format: Format[CreateCandidateCmd] = Json.format

@@ -10,15 +10,15 @@ import scala.concurrent.{ExecutionContext, Future}
 /**
   * Created by Joo on 6/5/2017.
   */
-class VoteDbHandler(val session: CassandraSession)
-                   (implicit ec: ExecutionContext) extends DbHandler {
+class VoteCollectorDbHandler(val session: CassandraSession)
+                            (implicit ec: ExecutionContext) extends DbHandler {
 
-  private lazy val insertVoteStatement: Future[PreparedStatement] = session.prepare(VoteDbHandler.insert_vote_sql)
+  private lazy val insertVoteStatement: Future[PreparedStatement] = session.prepare(VoteCollectorDbHandler.insert_vote_sql)
 
   override def createTables: Future[Done] = {
     for {
-      _ <- session.executeCreateTable(VoteDbHandler.create_table_votes)
-      _ <- session.executeCreateTable(VoteDbHandler.create_view_votes_by_city)
+      _ <- session.executeCreateTable(VoteCollectorDbHandler.create_table_votes)
+      _ <- session.executeCreateTable(VoteCollectorDbHandler.create_view_votes_by_city)
     } yield Done
   }
 
@@ -42,7 +42,7 @@ class VoteDbHandler(val session: CassandraSession)
 }
 
 
-object VoteDbHandler {
+object VoteCollectorDbHandler {
 
   val create_table_votes =
     """

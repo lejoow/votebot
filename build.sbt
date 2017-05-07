@@ -150,5 +150,5 @@ lazy val votebotTestKit = (project in file("votebot-testkit"))
 def commonSettings: Seq[Setting[_]] = Seq(
 )
 
-lagomCassandraCleanOnStart in ThisBuild := false
+lagomCassandraCleanOnStart in ThisBuild := true
 
